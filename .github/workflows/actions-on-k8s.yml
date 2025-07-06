@@ -1,11 +1,15 @@
-name: Docker Build Test
+name: Hello in NGINX Container
 
 on: [push]
 
 jobs:
-  build:
+  run-in-nginx:
     runs-on: self-hosted
+
     steps:
-      - uses: actions/checkout@v3
-      - name: Docker Build
-        run: docker build -t test-image .
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Run Hello World inside NGINX container
+        run: |
+          docker run --rm nginx:latest bash -c "echo Hello World from inside NGINX container"
